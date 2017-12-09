@@ -34,10 +34,10 @@ class GraphViewController: UIViewController {
         
         self.graph = GraphContainer()
         self.view.addSubview(self.graph)
-        self.graph.height(h: 300)
+        self.graph.height(h: 600)
         self.graph.width(w: 300)
         self.graph.pinTop(v: self.view, o: 100)
-        self.graph.pinLeft(v: self.view, o: 50)
+        self.graph.pinLeft(v: self.view)
         // Do any additional setup after loading the view.
     }
 

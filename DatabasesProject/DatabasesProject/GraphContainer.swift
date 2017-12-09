@@ -40,7 +40,8 @@ class GraphContainer: UIView {
         self.addSubview(self.graph)
         self.graph.width(w: 300)
         self.graph.height(h: 350)
-        self.graph.pinCenter(v: self)
+        self.graph.pinLeftRight(v: self, o: 20)
+        self.graph.pinTopBottom(v: self)
         
     }
     
