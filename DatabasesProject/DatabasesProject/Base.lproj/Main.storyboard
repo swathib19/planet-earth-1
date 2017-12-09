@@ -171,7 +171,7 @@
         <!--Map-->
         <scene sceneID="J2E-EY-VHn">
             <objects>
-                <viewController id="Nth-Bu-xGA" sceneMemberID="viewController">
+                <viewController id="Nth-Bu-xGA" customClass="GraphViewController" customModule="DatabasesProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mFN-29-4XA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
