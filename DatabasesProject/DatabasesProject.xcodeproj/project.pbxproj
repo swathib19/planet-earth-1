@@ -26,6 +26,8 @@
 		2993DC111FB544BF0052E471 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993DC101FB544BF0052E471 /* CalendarViewController.swift */; };
 		29E7EFBA1FDB030E00B85695 /* OverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7EFB91FDB030E00B85695 /* OverviewPageViewController.swift */; };
 		29E7EFBC1FDB038200B85695 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7EFBB1FDB038100B85695 /* AddViewController.swift */; };
+		2A8B7F9F1FDC7EC200E19B79 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B7F9E1FDC7EC200E19B79 /* GraphViewController.swift */; };
+		2A8B7FA11FDC7F5700E19B79 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8B7FA01FDC7F5700E19B79 /* GraphView.swift */; };
 		798AC0A31FDB29E600289472 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798AC0A21FDB29E600289472 /* GoogleService-Info.plist */; };
 		79944C4C1FDC6E9A00302D23 /* CarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79944C4B1FDC6E9A00302D23 /* CarPageViewController.swift */; };
 		87FCA5E1DC2C9861EA5C06ED /* Pods_DatabasesProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC67FD9F3753205910C7C141 /* Pods_DatabasesProject.framework */; };
@@ -73,6 +75,8 @@
 		2993DC101FB544BF0052E471 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		29E7EFB91FDB030E00B85695 /* OverviewPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewPageViewController.swift; sourceTree = "<group>"; };
 		29E7EFBB1FDB038100B85695 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		2A8B7F9E1FDC7EC200E19B79 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		2A8B7FA01FDC7F5700E19B79 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		35116A6A6953D84C81E04850 /* Pods-DatabasesProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatabasesProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DatabasesProjectUITests/Pods-DatabasesProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		358AACA2BFE92DA0203FD745 /* Pods-DatabasesProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatabasesProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DatabasesProjectUITests/Pods-DatabasesProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		760905B4DD20ADC80B3332A5 /* Pods_DatabasesProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatabasesProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,7 @@
 				2992BF4B1FB4C7DA0018A100 /* AppDelegate.swift */,
 				2992BF4D1FB4C7DA0018A100 /* ViewController.swift */,
 				2992BF4F1FB4C7DA0018A100 /* Main.storyboard */,
+				2A8B7FA01FDC7F5700E19B79 /* GraphView.swift */,
 				2992BF521FB4C7DA0018A100 /* Assets.xcassets */,
 				2992BF541FB4C7DA0018A100 /* LaunchScreen.storyboard */,
 				2992BF571FB4C7DA0018A100 /* Info.plist */,
@@ -166,6 +171,7 @@
 				2920973A1FDA3B42007D486C /* StatsPageViewController.swift */,
 				798AC0A21FDB29E600289472 /* GoogleService-Info.plist */,
 				79944C4B1FDC6E9A00302D23 /* CarPageViewController.swift */,
+				2A8B7F9E1FDC7EC200E19B79 /* GraphViewController.swift */,
 			);
 			path = DatabasesProject;
 			sourceTree = "<group>";
@@ -502,10 +508,12 @@
 				29E7EFBC1FDB038200B85695 /* AddViewController.swift in Sources */,
 				2992BF4E1FB4C7DA0018A100 /* ViewController.swift in Sources */,
 				2992BF4C1FB4C7DA0018A100 /* AppDelegate.swift in Sources */,
+				2A8B7FA11FDC7F5700E19B79 /* GraphView.swift in Sources */,
 				2993DC091FB4F72E0052E471 /* ProfileCollectionView.swift in Sources */,
 				2920973B1FDA3B42007D486C /* StatsPageViewController.swift in Sources */,
 				29921E521FB4DCE500FBD1B2 /* Contstraints.swift in Sources */,
 				79944C4C1FDC6E9A00302D23 /* CarPageViewController.swift in Sources */,
+				2A8B7F9F1FDC7EC200E19B79 /* GraphViewController.swift in Sources */,
 				292097331FDA08D8007D486C /* NewUserViewController.swift in Sources */,
 				292097391FDA17F9007D486C /* HomePageViewController.swift in Sources */,
 				2993DC0D1FB543CA0052E471 /* CalendarViewCell.swift in Sources */,

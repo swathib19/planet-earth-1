@@ -172,11 +172,29 @@
         <!--Map-->
         <scene sceneID="J2E-EY-VHn">
             <objects>
-                <viewController id="Nth-Bu-xGA" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mFN-29-4XA">
+                <viewController id="Nth-Bu-xGA" customClass="GraphViewController" customModule="DatabasesProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mFN-29-4XA" customClass="GraphView" customModule="DatabasesProject" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYD-fg-jBv" userLabel="ContainerView">
+                                <rect key="frame" x="37.5" y="194" width="300" height="250"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="l2T-t9-T4b"/>
+                                    <constraint firstAttribute="width" constant="300" id="rAP-sN-baj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerX" secondItem="EwL-2x-si0" secondAttribute="centerX" id="7QB-gk-aT6"/>
+                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerY" secondItem="EwL-2x-si0" secondAttribute="centerY" id="XE0-K3-RlB"/>
+                        </constraints>
+
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+
                         <viewLayoutGuide key="safeArea" id="EwL-2x-si0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="placeholder" id="ldA-8v-i4Y"/>
