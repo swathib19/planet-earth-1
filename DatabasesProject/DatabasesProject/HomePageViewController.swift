@@ -16,6 +16,9 @@ class HomePageViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
+    @IBOutlet weak var bestDay: UILabel!
+    @IBOutlet weak var worstDay: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let newLayer = CAGradientLayer()
