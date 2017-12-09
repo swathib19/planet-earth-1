@@ -17,9 +17,13 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
+    //DATA - query database for the user's saved cars and set the variables in carPicker equal to an array with these cars
     @IBOutlet weak var carPicker: UIPickerView!
+    
     @IBOutlet weak var milesDriven: UITextField!
+    
     @IBOutlet weak var datePicker: UIDatePicker!
+    //DATA - SAVE data about the car chose, miles driven, and date driven into the database
     
     
     let dummyCars = ["Audi Q6", "Hyundai Sonata"]
@@ -33,6 +37,7 @@ class AddViewController: UIViewController {
         self.milesDriven.keyboardType = .numberPad
         self.carPicker.dataSource = self
         self.carPicker.delegate = self
+        self.datePicker.setValue(UIColor.white, forKey: "textColor")
         // Do any additional setup after loading the view.
     }
 
@@ -72,7 +77,7 @@ extension AddViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let carName: String = dummyCars[row]
         let attrName: NSMutableAttributedString = NSMutableAttributedString(string: carName)
-        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSRangeFromString(carName))
+        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, carName.count))
         return NSAttributedString(attributedString: attrName)
     }
     

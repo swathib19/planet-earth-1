@@ -29,7 +29,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //print ("hi")
          //Do any additional setup after loading the view, typically from a nib.
         let newLayer = CAGradientLayer()
@@ -37,13 +36,39 @@ class ViewController: UIViewController {
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
         self.emailTextField.delegate = self;
-     
+        
+        // set placeholder
+        let placeholderString = "Email Address"
+        let attrPlaceholder = NSMutableAttributedString(string: placeholderString)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, placeholderString.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        self.emailTextField.attributedPlaceholder = placholderTxt
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    
+
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+        if segue.identifier == "login"{
+        let destinationVC = segue.destination as! HomePageViewController
+        destinationVC.userEmail = self.emailAddress
+        }
+     }
+    
+    
+    
 
 
 }

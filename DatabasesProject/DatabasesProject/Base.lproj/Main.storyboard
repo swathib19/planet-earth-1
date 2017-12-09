@@ -159,6 +159,7 @@
                     <tabBarItem key="tabBarItem" title="Overview" image="calendar1" id="Eh7-Nt-S29"/>
                     <connections>
                         <outlet property="datePicked" destination="a8r-7u-pfr" id="GHY-RV-6HA"/>
+                        <outlet property="datePicker" destination="a8r-7u-pfr" id="RuM-Bs-Wn7"/>
                         <outlet property="daysLogged" destination="o9F-CH-DhD" id="Rdo-4J-FGu"/>
                         <outlet property="energyImpact" destination="O0s-Zn-Jgo" id="a3v-mC-O3F"/>
                         <outlet property="milesDriven" destination="OWR-6e-Cwa" id="4km-pR-5PY"/>
@@ -172,6 +173,29 @@
         <scene sceneID="J2E-EY-VHn">
             <objects>
                 <viewController id="Nth-Bu-xGA" customClass="GraphViewController" customModule="DatabasesProject" customModuleProvider="target" sceneMemberID="viewController">
+
+
+                    <view key="view" contentMode="scaleToFill" id="mFN-29-4XA" customClass="GraphView" customModule="DatabasesProject" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYD-fg-jBv" userLabel="ContainerView">
+                                <rect key="frame" x="37.5" y="194" width="300" height="250"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="l2T-t9-T4b"/>
+                                    <constraint firstAttribute="width" constant="300" id="rAP-sN-baj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerX" secondItem="EwL-2x-si0" secondAttribute="centerX" id="7QB-gk-aT6"/>
+                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerY" secondItem="EwL-2x-si0" secondAttribute="centerY" id="XE0-K3-RlB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EwL-2x-si0"/>
+                    </view>
+
                     <tabBarItem key="tabBarItem" title="Map" image="placeholder" id="ldA-8v-i4Y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvO-ME-eSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -288,7 +312,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="154" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkf-Sw-pku">
-                                        <rect key="frame" x="9" y="31" width="128" height="95"/>
+                                        <rect key="frame" x="9" y="30" width="128" height="95"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                         <color key="textColor" red="0.97939572419999998" green="0.96201071120000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -347,7 +371,12 @@
                     <tabBarItem key="tabBarItem" title="Home" image="home" id="xis-P1-Khu"/>
                     <connections>
                         <outlet property="bestDay" destination="AIX-IW-Bdk" id="frz-Bk-zv4"/>
+                        <outlet property="bestDayEmissions" destination="I3C-N0-rQ7" id="bHj-uF-yoh"/>
+                        <outlet property="bestDayMiles" destination="AIX-IW-Bdk" id="D2u-gu-jxv"/>
+                        <outlet property="userName" destination="pFI-wq-plz" id="45O-1A-1IQ"/>
                         <outlet property="worstDay" destination="L2m-gX-N9k" id="kRb-hG-a8T"/>
+                        <outlet property="worstDayEmissions" destination="Hkf-Sw-pku" id="Vve-n3-1yr"/>
+                        <outlet property="worstDayMiles" destination="L2m-gX-N9k" id="yjJ-Fv-M3h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9K-KW-LZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -662,6 +691,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="saveButtonClicked:" destination="9wb-Ay-DpF" eventType="touchUpInside" id="IMv-xg-dPL"/>
                                     <segue destination="eFP-ai-uha" kind="show" id="M3C-ft-IRD"/>
                                 </connections>
                             </button>
@@ -690,6 +720,14 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tNw-8J-tNW"/>
                     </view>
+                    <connections>
+                        <outlet property="car1Make" destination="v1S-Yx-aob" id="XU4-hQ-b0A"/>
+                        <outlet property="car1Model" destination="DQd-Ol-XUa" id="Z4p-Ml-qZz"/>
+                        <outlet property="car1Year" destination="dUf-ZT-5F8" id="aLU-bb-c8X"/>
+                        <outlet property="car2Make" destination="ovZ-JK-vAI" id="8JK-jh-XYA"/>
+                        <outlet property="car2Model" destination="97M-S3-aFA" id="1R6-AV-Sp2"/>
+                        <outlet property="car2Year" destination="Nho-ZD-6Sv" id="MeP-Jf-5HS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gar-rK-8jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

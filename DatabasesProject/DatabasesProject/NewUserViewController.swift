@@ -16,8 +16,11 @@ class NewUserViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
 
+    //DATA - save the name into the database under the user
     @IBOutlet weak var nameTextField: UITextField!
+    //DATA - save the email into the database
     @IBOutlet weak var emailTextField: UITextField!
+    //DATA - save the zipcode into the database under the user
     @IBOutlet weak var zipCodeTextField: UITextField!
     
     fileprivate var name: String!
@@ -33,6 +36,21 @@ class NewUserViewController: UIViewController {
         view.layer.insertSublayer(newLayer, at: 0)
         zipCodeTextField.delegate = self
         
+        // set placeholder
+      
+        self.emailTextField.attributedPlaceholder = getPlaceHolderText(text: "Email Address")
+        
+        self.nameTextField.attributedPlaceholder = getPlaceHolderText(text: "Name")
+        
+        self.zipCodeTextField.attributedPlaceholder = getPlaceHolderText(text: "Zip Code")
+        
+    }
+    
+    fileprivate func getPlaceHolderText(text:String) -> NSAttributedString{
+        let attrPlaceholder = NSMutableAttributedString(string: text)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGray, range: NSMakeRange(0, text.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        return placholderTxt
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +73,7 @@ class NewUserViewController: UIViewController {
 extension NewUserViewController: UITextFieldDelegate{
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.becomeFirstResponder()
-        return true;
+        return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.email = emailTextField.text!
@@ -66,7 +84,7 @@ extension NewUserViewController: UITextFieldDelegate{
         print(self.zip)
         self.resignFirstResponder()
        // self.performSegue(withIdentifier: "login", sender: self.Any?)
-        return true;
+        return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.email = emailTextField.text!
