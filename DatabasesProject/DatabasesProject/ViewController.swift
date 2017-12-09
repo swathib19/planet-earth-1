@@ -58,14 +58,14 @@ class ViewController: UIViewController {
 
      // MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-        if segue.identifier == "login"{
-        let destinationVC = segue.destination as! HomePageViewController
-        destinationVC.userEmail = self.emailAddress
-        }
-     }
+//     // In a storyboard-based application, you will often want to do a little preparation before navigation
+//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////      Get the new view controller using segue.destinationViewController.
+//        if segue.identifier == "login"{
+//        let destinationVC = segue.destination as! HomePageViewController
+//        destinationVC.userEmail = self.emailAddress
+//        }
+//     }
     
     
     

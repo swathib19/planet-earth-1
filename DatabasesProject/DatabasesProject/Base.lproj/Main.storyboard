@@ -173,29 +173,39 @@
         <scene sceneID="J2E-EY-VHn">
             <objects>
                 <viewController id="Nth-Bu-xGA" customClass="GraphViewController" customModule="DatabasesProject" customModuleProvider="target" sceneMemberID="viewController">
-
-
                     <view key="view" contentMode="scaleToFill" id="mFN-29-4XA" customClass="GraphView" customModule="DatabasesProject" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYD-fg-jBv" userLabel="ContainerView">
-                                <rect key="frame" x="37.5" y="194" width="300" height="250"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="l2T-t9-T4b"/>
-                                    <constraint firstAttribute="width" constant="300" id="rAP-sN-baj"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E A R T H" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXk-MX-CDK">
+                                <rect key="frame" x="190" y="28" width="150" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="planet_earth" translatesAutoresizingMaskIntoConstraints="NO" id="qOL-qs-fVN">
+                                <rect key="frame" x="169" y="28" width="50" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="P L A N E T    " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzl-8A-WcC">
+                                <rect key="frame" x="70" y="28" width="106" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvL-12-myg">
+                                <rect key="frame" x="73" y="91" width="242" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.97939572419999998" green="0.96201071120000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerX" secondItem="EwL-2x-si0" secondAttribute="centerX" id="7QB-gk-aT6"/>
-                            <constraint firstItem="xYD-fg-jBv" firstAttribute="centerY" secondItem="EwL-2x-si0" secondAttribute="centerY" id="XE0-K3-RlB"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EwL-2x-si0"/>
                     </view>
-
                     <tabBarItem key="tabBarItem" title="Map" image="placeholder" id="ldA-8v-i4Y"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kvO-ME-eSs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,11 +380,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="home" id="xis-P1-Khu"/>
                     <connections>
+                        <outlet property="BestDay" destination="fef-CV-DDZ" id="7Ln-26-wmv"/>
                         <outlet property="bestDay" destination="AIX-IW-Bdk" id="frz-Bk-zv4"/>
                         <outlet property="bestDayEmissions" destination="I3C-N0-rQ7" id="bHj-uF-yoh"/>
                         <outlet property="bestDayMiles" destination="AIX-IW-Bdk" id="D2u-gu-jxv"/>
                         <outlet property="userName" destination="pFI-wq-plz" id="45O-1A-1IQ"/>
-                        <outlet property="worstDay" destination="L2m-gX-N9k" id="kRb-hG-a8T"/>
+                        <outlet property="worstDay" destination="wf9-JO-nbn" id="Hng-o0-sG2"/>
                         <outlet property="worstDayEmissions" destination="Hkf-Sw-pku" id="Vve-n3-1yr"/>
                         <outlet property="worstDayMiles" destination="L2m-gX-N9k" id="yjJ-Fv-M3h"/>
                     </connections>
@@ -649,8 +660,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Your Car Information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-dd-hvD">
-                                <rect key="frame" x="23" y="66" width="278" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Your Car Information:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-dd-hvD">
+                                <rect key="frame" x="23" y="66" width="343" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1099,7 +1110,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZlO-Hi-lgI"/>
         <segue reference="M3C-ft-IRD"/>
-        <segue reference="3Pj-Iz-ls1"/>
+        <segue reference="Aj5-CD-zWA"/>
         <segue reference="cNc-8G-7SW"/>
     </inferredMetricsTieBreakers>
 </document>

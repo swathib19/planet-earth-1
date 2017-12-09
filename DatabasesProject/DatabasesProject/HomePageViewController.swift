@@ -27,6 +27,8 @@ class HomePageViewController: UIViewController {
     // DATA: set attributed text for this label with min miles driven by user - turn it white with turnTextWhite
     @IBOutlet weak var bestDayMiles: UILabel!
     
+    @IBOutlet weak var worstDay: UILabel!
+    @IBOutlet weak var bestDay: UILabel!
     //DATA: set attributed text for this label with max miles driven by user - turn it white with turnTextWhite
     @IBOutlet weak var worstDayMiles: UILabel!
     
