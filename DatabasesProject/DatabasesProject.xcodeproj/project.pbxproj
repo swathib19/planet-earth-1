@@ -27,6 +27,7 @@
 		29E7EFBA1FDB030E00B85695 /* OverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7EFB91FDB030E00B85695 /* OverviewPageViewController.swift */; };
 		29E7EFBC1FDB038200B85695 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E7EFBB1FDB038100B85695 /* AddViewController.swift */; };
 		798AC0A31FDB29E600289472 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 798AC0A21FDB29E600289472 /* GoogleService-Info.plist */; };
+		79944C4C1FDC6E9A00302D23 /* CarPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79944C4B1FDC6E9A00302D23 /* CarPageViewController.swift */; };
 		87FCA5E1DC2C9861EA5C06ED /* Pods_DatabasesProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC67FD9F3753205910C7C141 /* Pods_DatabasesProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		760905B4DD20ADC80B3332A5 /* Pods_DatabasesProjectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatabasesProjectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		772FBBCB67E504C0D9339B86 /* Pods_DatabasesProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatabasesProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		798AC0A21FDB29E600289472 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		79944C4B1FDC6E9A00302D23 /* CarPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPageViewController.swift; sourceTree = "<group>"; };
 		7B2C739C7C4CBD94B487893E /* Pods-DatabasesProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatabasesProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DatabasesProject/Pods-DatabasesProject.debug.xcconfig"; sourceTree = "<group>"; };
 		C64D08D507D810F9D73B897B /* Pods-DatabasesProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatabasesProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DatabasesProjectTests/Pods-DatabasesProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8AB6EBB02D09E260F28C4F1 /* Pods-DatabasesProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatabasesProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-DatabasesProject/Pods-DatabasesProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				29E7EFB91FDB030E00B85695 /* OverviewPageViewController.swift */,
 				2920973A1FDA3B42007D486C /* StatsPageViewController.swift */,
 				798AC0A21FDB29E600289472 /* GoogleService-Info.plist */,
+				79944C4B1FDC6E9A00302D23 /* CarPageViewController.swift */,
 			);
 			path = DatabasesProject;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				2993DC091FB4F72E0052E471 /* ProfileCollectionView.swift in Sources */,
 				2920973B1FDA3B42007D486C /* StatsPageViewController.swift in Sources */,
 				29921E521FB4DCE500FBD1B2 /* Contstraints.swift in Sources */,
+				79944C4C1FDC6E9A00302D23 /* CarPageViewController.swift in Sources */,
 				292097331FDA08D8007D486C /* NewUserViewController.swift in Sources */,
 				292097391FDA17F9007D486C /* HomePageViewController.swift in Sources */,
 				2993DC0D1FB543CA0052E471 /* CalendarViewCell.swift in Sources */,
