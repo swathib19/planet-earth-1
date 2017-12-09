@@ -17,6 +17,7 @@ class CarPageViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     @IBOutlet weak var car1Make: UITextField!
+    //DATA - Save car1 make, model, and year into the database
     @IBOutlet weak var car1Model: UITextField!
     @IBOutlet weak var car1Year: UITextField!
     
@@ -26,6 +27,7 @@ class CarPageViewController: UIViewController {
 
     
     @IBOutlet weak var car2Make: UITextField!
+    //DATA - SAVE car2 make, model, and year into the database (if it exists)
     @IBOutlet weak var car2Model: UITextField!
     @IBOutlet weak var car2Year: UITextField!
     

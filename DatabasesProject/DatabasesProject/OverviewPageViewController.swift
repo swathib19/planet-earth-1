@@ -16,10 +16,13 @@ class OverviewPageViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    
+    //DATA - Query based on the date selected and save the number of miles driven on that day
     @IBOutlet weak var milesDriven: UILabel!
+    //DATA - use the number fo miles driven on a date divide by miles gallon * (0.008887/0.898)
     @IBOutlet weak var energyImpact: UILabel!
+    
     @IBOutlet weak var datePicked: UIDatePicker!
+    //DATA - query the database and save the number of entries that a person has (COUNT)
     @IBOutlet weak var daysLogged: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     

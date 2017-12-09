@@ -176,7 +176,6 @@
                     <view key="view" contentMode="scaleToFill" id="mFN-29-4XA" customClass="GraphView" customModule="DatabasesProject" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYD-fg-jBv" userLabel="ContainerView">
                                 <rect key="frame" x="37.5" y="194" width="300" height="250"/>
@@ -192,9 +191,6 @@
                             <constraint firstItem="xYD-fg-jBv" firstAttribute="centerX" secondItem="EwL-2x-si0" secondAttribute="centerX" id="7QB-gk-aT6"/>
                             <constraint firstItem="xYD-fg-jBv" firstAttribute="centerY" secondItem="EwL-2x-si0" secondAttribute="centerY" id="XE0-K3-RlB"/>
                         </constraints>
-
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-
                         <viewLayoutGuide key="safeArea" id="EwL-2x-si0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="placeholder" id="ldA-8v-i4Y"/>
@@ -313,7 +309,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="154" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hkf-Sw-pku">
-                                        <rect key="frame" x="9" y="31" width="128" height="95"/>
+                                        <rect key="frame" x="9" y="30" width="128" height="95"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                         <color key="textColor" red="0.97939572419999998" green="0.96201071120000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -372,7 +368,12 @@
                     <tabBarItem key="tabBarItem" title="Home" image="home" id="xis-P1-Khu"/>
                     <connections>
                         <outlet property="bestDay" destination="AIX-IW-Bdk" id="frz-Bk-zv4"/>
+                        <outlet property="bestDayEmissions" destination="I3C-N0-rQ7" id="bHj-uF-yoh"/>
+                        <outlet property="bestDayMiles" destination="AIX-IW-Bdk" id="D2u-gu-jxv"/>
+                        <outlet property="userName" destination="pFI-wq-plz" id="45O-1A-1IQ"/>
                         <outlet property="worstDay" destination="L2m-gX-N9k" id="kRb-hG-a8T"/>
+                        <outlet property="worstDayEmissions" destination="Hkf-Sw-pku" id="Vve-n3-1yr"/>
+                        <outlet property="worstDayMiles" destination="L2m-gX-N9k" id="yjJ-Fv-M3h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9K-KW-LZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1094,7 +1095,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZlO-Hi-lgI"/>
-        <segue reference="Fop-gw-YjY"/>
+        <segue reference="M3C-ft-IRD"/>
         <segue reference="3Pj-Iz-ls1"/>
         <segue reference="cNc-8G-7SW"/>
     </inferredMetricsTieBreakers>

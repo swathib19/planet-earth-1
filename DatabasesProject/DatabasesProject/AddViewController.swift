@@ -17,9 +17,13 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
+    //DATA - query database for the user's saved cars and set the variables in carPicker equal to an array with these cars
     @IBOutlet weak var carPicker: UIPickerView!
+    
     @IBOutlet weak var milesDriven: UITextField!
+    
     @IBOutlet weak var datePicker: UIDatePicker!
+    //DATA - SAVE data about the car chose, miles driven, and date driven into the database
     
     
     let dummyCars = ["Audi Q6", "Hyundai Sonata"]

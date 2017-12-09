@@ -16,8 +16,27 @@ class HomePageViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    @IBOutlet weak var bestDay: UILabel!
-    @IBOutlet weak var worstDay: UILabel!
+    let tonsOfC02perGallon = 0.008887
+    
+    // DATA: use this email to query the database to get the user
+    var userEmail: String!
+    
+    // DATA: set attributed text for this label with user name from database - turn it white with turnTextWhite
+    @IBOutlet weak var userName: UILabel!
+    
+    // DATA: set attributed text for this label with min miles driven by user - turn it white with turnTextWhite
+    @IBOutlet weak var bestDayMiles: UILabel!
+    
+    //DATA: set attributed text for this label with max miles driven by user - turn it white with turnTextWhite
+    @IBOutlet weak var worstDayMiles: UILabel!
+    
+    // DATA uncomment the lines below to fill in the best/worst day emissions
+    // var mpg: Int = query that gives mpg for car driven on best day
+    // use this formula to calculate emissions of a car: (0.008887/0.989) * (miles driven)/(miles per gallon)
+    // DATA: set the best day emissions label (attributed text) with above results - turn it white with turnTextWhite
+    @IBOutlet weak var bestDayEmissions: UILabel!
+    // DATA: set the worst day emissions label (attribuetd text) with above results - turn it white with turnTextWhite (same equation as above)
+    @IBOutlet weak var worstDayEmissions: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +50,22 @@ class HomePageViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // FUNCTION TO TURN TEXT WHITE
+    fileprivate func turnTextWhite(text:String) -> NSAttributedString{
+        let attrPlaceholder = NSMutableAttributedString(string: text)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGray, range: NSMakeRange(0, text.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        return placholderTxt
+    }
+    
+    fileprivate func getPlaceHolderText(text:String) -> NSAttributedString{
+        let attrPlaceholder = NSMutableAttributedString(string: text)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGray, range: NSMakeRange(0, text.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        return placholderTxt
     }
     
 
