@@ -17,7 +17,13 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
+    @IBOutlet weak var carPicker: UIPickerView!
     @IBOutlet weak var milesDriven: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    
+    let dummyCars = ["Audi Q6", "Hyundai Sonata"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let newLayer = CAGradientLayer()
@@ -25,6 +31,8 @@ class AddViewController: UIViewController {
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
         self.milesDriven.keyboardType = .numberPad
+        self.carPicker.dataSource = self
+        self.carPicker.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -33,6 +41,9 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func datePicked(_ sender: UIDatePicker){
+        print(sender.date)
+    }
 
     /*
     // MARK: - Navigation
@@ -44,4 +55,30 @@ class AddViewController: UIViewController {
     }
     */
 
+    
+    }
+extension AddViewController: UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 2
+    }
+    
 }
+
+extension AddViewController: UIPickerViewDelegate{
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let carName: String = dummyCars[row]
+        let attrName: NSMutableAttributedString = NSMutableAttributedString(string: carName)
+        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSRangeFromString(carName))
+        return NSAttributedString(attributedString: attrName)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("selected row", row)
+    }
+}
+
+
