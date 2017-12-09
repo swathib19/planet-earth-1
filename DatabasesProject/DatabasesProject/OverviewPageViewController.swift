@@ -21,16 +21,15 @@ class OverviewPageViewController: UIViewController {
     @IBOutlet weak var energyImpact: UILabel!
     @IBOutlet weak var datePicked: UIDatePicker!
     @IBOutlet weak var daysLogged: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
-    @IBAction func datePickerChanged(_ sender: Any) {
-        print("hi changed the date picker you should probs do something with that")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let newLayer = CAGradientLayer()
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
+        self.datePicker.setValue(UIColor.white, forKey: "textColor")
         // Do any additional setup after loading the view.
     }
 

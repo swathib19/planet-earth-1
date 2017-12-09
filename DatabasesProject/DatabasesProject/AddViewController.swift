@@ -33,6 +33,7 @@ class AddViewController: UIViewController {
         self.milesDriven.keyboardType = .numberPad
         self.carPicker.dataSource = self
         self.carPicker.delegate = self
+        self.datePicker.setValue(UIColor.white, forKey: "textColor")
         // Do any additional setup after loading the view.
     }
 
@@ -72,7 +73,7 @@ extension AddViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let carName: String = dummyCars[row]
         let attrName: NSMutableAttributedString = NSMutableAttributedString(string: carName)
-        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSRangeFromString(carName))
+        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, carName.count))
         return NSAttributedString(attributedString: attrName)
     }
     

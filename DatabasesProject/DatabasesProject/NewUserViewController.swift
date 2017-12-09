@@ -33,6 +33,21 @@ class NewUserViewController: UIViewController {
         view.layer.insertSublayer(newLayer, at: 0)
         zipCodeTextField.delegate = self
         
+        // set placeholder
+      
+        self.emailTextField.attributedPlaceholder = getPlaceHolderText(text: "Email Address")
+        
+        self.nameTextField.attributedPlaceholder = getPlaceHolderText(text: "Name")
+        
+        self.zipCodeTextField.attributedPlaceholder = getPlaceHolderText(text: "Zip Code")
+        
+    }
+    
+    fileprivate func getPlaceHolderText(text:String) -> NSAttributedString{
+        let attrPlaceholder = NSMutableAttributedString(string: text)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.lightGray, range: NSMakeRange(0, text.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        return placholderTxt
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +70,7 @@ class NewUserViewController: UIViewController {
 extension NewUserViewController: UITextFieldDelegate{
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.becomeFirstResponder()
-        return true;
+        return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.email = emailTextField.text!
@@ -66,7 +81,7 @@ extension NewUserViewController: UITextFieldDelegate{
         print(self.zip)
         self.resignFirstResponder()
        // self.performSegue(withIdentifier: "login", sender: self.Any?)
-        return true;
+        return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.email = emailTextField.text!

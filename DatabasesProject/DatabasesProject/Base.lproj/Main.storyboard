@@ -159,6 +159,7 @@
                     <tabBarItem key="tabBarItem" title="Overview" image="calendar1" id="Eh7-Nt-S29"/>
                     <connections>
                         <outlet property="datePicked" destination="a8r-7u-pfr" id="GHY-RV-6HA"/>
+                        <outlet property="datePicker" destination="a8r-7u-pfr" id="RuM-Bs-Wn7"/>
                         <outlet property="daysLogged" destination="o9F-CH-DhD" id="Rdo-4J-FGu"/>
                         <outlet property="energyImpact" destination="O0s-Zn-Jgo" id="a3v-mC-O3F"/>
                         <outlet property="milesDriven" destination="OWR-6e-Cwa" id="4km-pR-5PY"/>
@@ -668,6 +669,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="saveButtonClicked:" destination="9wb-Ay-DpF" eventType="touchUpInside" id="IMv-xg-dPL"/>
                                     <segue destination="eFP-ai-uha" kind="show" id="M3C-ft-IRD"/>
                                 </connections>
                             </button>
@@ -696,6 +698,14 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="tNw-8J-tNW"/>
                     </view>
+                    <connections>
+                        <outlet property="car1Make" destination="v1S-Yx-aob" id="XU4-hQ-b0A"/>
+                        <outlet property="car1Model" destination="DQd-Ol-XUa" id="Z4p-Ml-qZz"/>
+                        <outlet property="car1Year" destination="dUf-ZT-5F8" id="aLU-bb-c8X"/>
+                        <outlet property="car2Make" destination="ovZ-JK-vAI" id="8JK-jh-XYA"/>
+                        <outlet property="car2Model" destination="97M-S3-aFA" id="1R6-AV-Sp2"/>
+                        <outlet property="car2Year" destination="Nho-ZD-6Sv" id="MeP-Jf-5HS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gar-rK-8jT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1066,7 +1076,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZlO-Hi-lgI"/>
-        <segue reference="M3C-ft-IRD"/>
+        <segue reference="Fop-gw-YjY"/>
         <segue reference="3Pj-Iz-ls1"/>
         <segue reference="cNc-8G-7SW"/>
     </inferredMetricsTieBreakers>

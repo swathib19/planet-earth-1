@@ -37,7 +37,15 @@ class ViewController: UIViewController {
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
         self.emailTextField.delegate = self;
-     
+        
+        // set placeholder
+        let placeholderString = "Email Address"
+        let attrPlaceholder = NSMutableAttributedString(string: placeholderString)
+        attrPlaceholder.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, placeholderString.count))
+        let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
+        self.emailTextField.attributedPlaceholder = placholderTxt
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
