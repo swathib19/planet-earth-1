@@ -17,12 +17,14 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
+    @IBOutlet weak var milesDriven: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         let newLayer = CAGradientLayer()
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
+        self.milesDriven.keyboardType = .numberPad
         // Do any additional setup after loading the view.
     }
 
