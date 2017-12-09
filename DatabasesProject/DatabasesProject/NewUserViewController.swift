@@ -27,11 +27,12 @@ class NewUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         let newLayer = CAGradientLayer()
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
+        zipCodeTextField.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,5 +50,31 @@ class NewUserViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
 
+extension NewUserViewController: UITextFieldDelegate{
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true;
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.email = emailTextField.text!
+        print(self.email)
+        self.name = nameTextField.text!
+        print(self.name)
+        self.zip = zipCodeTextField.text!
+        print(self.zip)
+        self.resignFirstResponder()
+       // self.performSegue(withIdentifier: "login", sender: self.Any?)
+        return true;
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.email = emailTextField.text!
+        print(self.email)
+        self.name = nameTextField.text!
+        print(self.name)
+        self.zip = zipCodeTextField.text!
+        print(self.zip)
+        self.resignFirstResponder()
+    }
 }
