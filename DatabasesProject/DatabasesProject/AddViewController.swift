@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseCore
+import FirebaseDatabase
+import FirebaseAuth
 
 class AddViewController: UIViewController {
 
@@ -17,16 +21,17 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    //DATA - query database for the user's saved cars and set the variables in carPicker equal to an array with these cars
+    @IBOutlet weak var savePressed: UIButton!
     @IBOutlet weak var carPicker: UIPickerView!
-    
     @IBOutlet weak var milesDriven: UITextField!
-    
     @IBOutlet weak var datePicker: UIDatePicker!
-    //DATA - SAVE data about the car chose, miles driven, and date driven into the database
     
+    fileprivate var miles: String!
+    fileprivate var stringDate: String!
     
     let dummyCars = ["Audi Q6", "Hyundai Sonata"]
+    
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +39,11 @@ class AddViewController: UIViewController {
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
+
+        ref = Database.database().reference()
+        
+        //self.datePicker.addTarget(self, action #selector(dateChanged:);, for: .valueChanged)
+        
         self.milesDriven.keyboardType = .numberPad
         self.carPicker.dataSource = self
         self.carPicker.delegate = self
@@ -46,21 +56,28 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func savePressed(_ sender: Any) {
+        guard let miles = milesDriven.text, !miles.isEmpty else {print("No miles entered"); return}
+        
+//        guard let stringDate = datePicker.text, !miles.isEmpty else {print("No miles entered"); return}
+        
+        let userID = Auth.auth().currentUser?.uid
+        let key = ref.child("UserTrips").childByAutoId().key
+        
+        let trip = [
+            "date": stringDate,
+            "miles": miles,
+            "vehicleId": ""
+        ]
+        let childUpdates = ["/userTrips/\(userID!)/\(key)": trip]
+        
+        ref.updateChildValues(childUpdates)
+    }
+    
     func datePicked(_ sender: UIDatePicker){
         print(sender.date)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
     }
 extension AddViewController: UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -73,7 +90,7 @@ extension AddViewController: UIPickerViewDataSource{
     
 }
 
-extension AddViewController: UIPickerViewDelegate{
+extension AddViewController: UIPickerViewDelegate, UITextFieldDelegate{
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let carName: String = dummyCars[row]
         let attrName: NSMutableAttributedString = NSMutableAttributedString(string: carName)
@@ -84,6 +101,25 @@ extension AddViewController: UIPickerViewDelegate{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("selected row", row)
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.miles = milesDriven.text!
+        self.resignFirstResponder()
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.miles = milesDriven.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.resignFirstResponder()
+    }
+
 }
+    
+
+    
+
 
 
