@@ -13,9 +13,7 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    let userID = Auth.auth().currentUser?.uid
     let ref = Database.database().reference().child("MakesModels")
-    let fref = Database.database().reference().child("UserVehicles")
     
     @IBOutlet weak var makeField: UITextField!
     @IBOutlet weak var modelField: UITextField!
@@ -137,13 +135,22 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @IBAction func savePressed(_ sender: Any) {
-        print("YOU'RE AN IDIOT!")
-        print(self.myID)
         if self.myID == -1 {
-            print("you're a bitch who didn't choose!")
+            let alert = UIAlertController(title: "Enter Your Transportation", message: "We can't show your  impact without it!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
         else {
-            print("you're good... for now")
+            let fref = Database.database().reference().child("UserVehicles")
+            let userID = Auth.auth().currentUser?.uid
+            print("proper behavior")
+            print(userID!)
+            print(self.myID)
+            fref.setValue([String(self.myID) : userID! as NSString])
+            
+            
         }
     }
     

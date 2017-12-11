@@ -754,7 +754,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="savePressed:" destination="9wb-Ay-DpF" eventType="primaryActionTriggered" id="aZS-rj-aaI"/>
-                                    <segue destination="eFP-ai-uha" kind="show" id="PDX-cL-sPI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1166,7 +1165,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rEr-6i-G7A"/>
-        <segue reference="PDX-cL-sPI"/>
+        <segue reference="GXR-4s-DuP"/>
         <segue reference="aO6-aA-1N1"/>
         <segue reference="oQl-bz-LlZ"/>
     </inferredMetricsTieBreakers>
