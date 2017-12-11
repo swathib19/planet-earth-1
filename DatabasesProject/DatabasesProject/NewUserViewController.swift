@@ -20,17 +20,11 @@ class NewUserViewController: UIViewController {
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
 
     @IBOutlet weak var createNewUser: UIButton!
-    //DATA - save the name into the database under the user
     @IBOutlet weak var nameTextField: UITextField!
-    //DATA - save the email into the database
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
     
-    //DATA - save the zipcode into the database under the user
     @IBOutlet weak var zipCodeTextField: UITextField!
-    
-    
     
     fileprivate var name: String!
     fileprivate var email: String!
