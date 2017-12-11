@@ -24,6 +24,9 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var modelPicker = UIPickerView()
     var yearPicker = UIPickerView()
     
+    let ref = Database.database().reference()
+    let rref = fire
+    
     let makes = ["Acura", "Alfa Romeo", "Aston Martin", "Audi", "BMW", "Bentley", "Bugatti", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ferrari", "Fiat", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lexus", "Lincoln", "Lotus", "MINI", "Maserati", "Maybach", "Mazda", "Mercedes-Benz", "Mercury", "Mitsubishi", "Nissan", "Oldsmobile", "Peugeot", "Plymouth", "Pontiac", "Porsche", "Ram", "Rolls-Royce", "Roush Performance", "Saab", "Saturn", "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo", "smart"]
 
     var models : [String]? = []
@@ -92,15 +95,43 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == makePicker{
-            makeField.text = makes[row]
-            models? = ["buts"]
+            var makeText = makes[row]
+            var path = "makes".
+            
+            
+            makeField.text = makeText
+            makeField.endEditing(true)
+            
+            modelField.text = nil
+            yearField.text = nil
+            years? = []
+            
+            
+            years? = []
         }
         else if pickerView == modelPicker{
-            modelField.text = models![row]
-            years? = ["butts"]
+            var modelString = models![row]
+            modelField.text = modelString
+            modelField.endEditing(true)
+            
+            print("I am here!")
+            modelString = modelString.replacingOccurrences(of: "/", with: "")
+            modelString = modelString.replacingOccurrences(of: ".", with: "")
+            
+            print(modelString)
+            print(modelString.hashValue)
+            print(modelString.hash)
+            
+            if models![row].contains("e"){
+                years? = ["butts","grapes","bees"]
+            } else {
+                years? = ["i","have","no","e's"]
+            }
+            yearField.text = nil
         }
         else{
             yearField.text = years![row]
+            yearField.endEditing(true)
         }
     }
     
