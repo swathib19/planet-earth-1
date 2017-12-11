@@ -25,7 +25,6 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var yearPicker = UIPickerView()
     
     let ref = Database.database().reference()
-    let rref = fire
     
     let makes = ["Acura", "Alfa Romeo", "Aston Martin", "Audi", "BMW", "Bentley", "Bugatti", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ferrari", "Fiat", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lexus", "Lincoln", "Lotus", "MINI", "Maserati", "Maybach", "Mazda", "Mercedes-Benz", "Mercury", "Mitsubishi", "Nissan", "Oldsmobile", "Peugeot", "Plymouth", "Pontiac", "Porsche", "Ram", "Rolls-Royce", "Roush Performance", "Saab", "Saturn", "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo", "smart"]
 
@@ -96,8 +95,6 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         if pickerView == makePicker{
             var makeText = makes[row]
-            var path = "makes".
-            
             
             makeField.text = makeText
             makeField.endEditing(true)
