@@ -830,6 +830,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Itd-Jk-H6R" id="Rws-2t-JMC"/>
+                                </connections>
                             </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7bb-li-qol">
                                 <rect key="frame" x="0.0" y="328" width="375" height="160"/>
@@ -837,8 +840,15 @@
                                 <date key="date" timeIntervalSinceReferenceDate="534396532.669191">
                                     <!--2017-12-08 03:28:52 +0000-->
                                 </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                    <!--2037-12-31 11:00:00 +0000-->
+                                </date>
                                 <connections>
                                     <action selector="datePicked:" destination="Itd-Jk-H6R" eventType="valueChanged" id="psd-Le-gAt"/>
+                                    <action selector="datePicker:" destination="Itd-Jk-H6R" eventType="valueChanged" id="uiu-d1-jlR"/>
                                 </connections>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCF-KD-SUF">
@@ -869,6 +879,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="savePressed:" destination="Itd-Jk-H6R" eventType="touchUpInside" id="YfI-f8-IQx"/>
                                     <segue destination="eFP-ai-uha" kind="show" id="Fop-gw-YjY"/>
                                 </connections>
                             </button>
@@ -885,6 +896,7 @@
                         <outlet property="carPicker" destination="d7u-lc-Mgn" id="NbK-BR-GXb"/>
                         <outlet property="datePicker" destination="7bb-li-qol" id="QDc-cy-Om5"/>
                         <outlet property="milesDriven" destination="ALc-hZ-cae" id="yoY-aJ-RTb"/>
+                        <outlet property="savePressed" destination="g7i-cA-9lv" id="kZ9-SP-ajw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIM-hb-TI0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1128,8 +1140,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rEr-6i-G7A"/>
-        <segue reference="GXR-4s-DuP"/>
+        <segue reference="Fop-gw-YjY"/>
         <segue reference="Aj5-CD-zWA"/>
-        <segue reference="cNc-8G-7SW"/>
+        <segue reference="oQl-bz-LlZ"/>
     </inferredMetricsTieBreakers>
 </document>
