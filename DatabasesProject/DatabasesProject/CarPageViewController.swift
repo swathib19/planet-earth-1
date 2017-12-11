@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
@@ -13,23 +14,25 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
     let userID = Auth.auth().currentUser?.uid
-    
-    
+    let ref = Database.database().reference().child("MakesModels")
+    let fref = Database.database().reference().child("UserVehicles")
     
     @IBOutlet weak var makeField: UITextField!
     @IBOutlet weak var modelField: UITextField!
     @IBOutlet weak var yearField: UITextField!
+    @IBOutlet weak var SaveButton: UIButton!
+    
     
     var makePicker = UIPickerView()
     var modelPicker = UIPickerView()
     var yearPicker = UIPickerView()
     
-    let ref = Database.database().reference()
-    
     let makes = ["Acura", "Alfa Romeo", "Aston Martin", "Audi", "BMW", "Bentley", "Bugatti", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ferrari", "Fiat", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lexus", "Lincoln", "Lotus", "MINI", "Maserati", "Maybach", "Mazda", "Mercedes-Benz", "Mercury", "Mitsubishi", "Nissan", "Oldsmobile", "Peugeot", "Plymouth", "Pontiac", "Porsche", "Ram", "Rolls-Royce", "Roush Performance", "Saab", "Saturn", "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo", "smart"]
 
-    var models : [String]? = []
-    var years : [String]? = []
+    var models : [String] = []
+    var years : [Any] = []
+    var ids : NSDictionary = [:]
+    var myID : Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +63,10 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             return makes.count
         }
         else if pickerView == modelPicker{
-            return models!.count
+            return models.count
         }
         else{
-            return years!.count
+            return years.count
         }
     }
     
@@ -79,59 +82,70 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
         else if pickerView == modelPicker{
             if makeField.text != nil{
-                return models![row]
+                return models[row]
             }
         }
         else{
             if modelField.text != nil{
-                return years![row]
+                return years[row] as? String
             }
             
         }
-        return "Temp"
+        return nil
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == makePicker{
-            var makeText = makes[row]
             
+            let makeText = makes[row]
+            let path = "Makes/".appending(makeText)
+            ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+                let possibleModels = snapshot.value as! NSArray as! [String]
+                self.models = possibleModels
+            })
             makeField.text = makeText
             makeField.endEditing(true)
             
             modelField.text = nil
             yearField.text = nil
-            years? = []
-            
-            
-            years? = []
+            years = []
         }
         else if pickerView == modelPicker{
-            var modelString = models![row]
-            modelField.text = modelString
+            modelField.text = models[row]
             modelField.endEditing(true)
             
-            print("I am here!")
-            modelString = modelString.replacingOccurrences(of: "/", with: "")
-            modelString = modelString.replacingOccurrences(of: ".", with: "")
-            
-            print(modelString)
-            print(modelString.hashValue)
-            print(modelString.hash)
-            
-            if models![row].contains("e"){
-                years? = ["butts","grapes","bees"]
-            } else {
-                years? = ["i","have","no","e's"]
+            var modelText = models[row]
+            if modelText.contains("/") || modelText.contains("."){
+                modelText = modelText.replacingOccurrences(of: "/", with: "")
+                modelText = modelText.replacingOccurrences(of: ".", with: "")
             }
+            
+            let path = "Models/".appending(modelText)
+            ref.child(path).observeSingleEvent(of: .value, with: { (snapshot) in
+                let possibleYears = snapshot.value as! NSDictionary
+                self.years = possibleYears.allKeys
+                self.ids =  possibleYears
+            })
             yearField.text = nil
         }
         else{
-            yearField.text = years![row]
+            yearField.text = years[row] as? String
             yearField.endEditing(true)
+            self.myID = ids.object(forKey: years[row])! as! Int
         }
     }
     
+    @IBAction func savePressed(_ sender: Any) {
+        print("YOU'RE AN IDIOT!")
+        print(self.myID)
+        if self.myID == -1 {
+            print("you're a bitch who didn't choose!")
+        }
+        else {
+            print("you're good... for now")
+        }
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -163,6 +177,4 @@ extension CarPageViewController: UITextFieldDelegate{
         self.becomeFirstResponder()
         return true
     }
-    
-    
 }

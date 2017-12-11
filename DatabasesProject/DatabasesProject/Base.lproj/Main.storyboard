@@ -753,8 +753,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="saveButtonClicked:" destination="9wb-Ay-DpF" eventType="touchUpInside" id="IMv-xg-dPL"/>
-                                    <segue destination="eFP-ai-uha" kind="show" id="M3C-ft-IRD"/>
+                                    <action selector="savePressed:" destination="9wb-Ay-DpF" eventType="primaryActionTriggered" id="aZS-rj-aaI"/>
+                                    <segue destination="eFP-ai-uha" kind="show" id="PDX-cL-sPI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -779,6 +779,7 @@
                         <viewLayoutGuide key="safeArea" id="tNw-8J-tNW"/>
                     </view>
                     <connections>
+                        <outlet property="SaveButton" destination="a7G-ku-UI3" id="gRT-Dn-FmG"/>
                         <outlet property="makeField" destination="yVX-cV-s2I" id="Cj9-tr-2ti"/>
                         <outlet property="modelField" destination="X28-3g-c4b" id="pc7-cR-AX7"/>
                         <outlet property="yearField" destination="S88-EJ-ZqM" id="Rnz-E5-YRR"/>
@@ -1165,11 +1166,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rEr-6i-G7A"/>
-        <segue reference="GXR-4s-DuP"/>
-        <segue reference="Aj5-CD-zWA"/>
-        <segue reference="cNc-8G-7SW"/>
-        <segue reference="Fop-gw-YjY"/>
-        <segue reference="Aj5-CD-zWA"/>
+        <segue reference="PDX-cL-sPI"/>
+        <segue reference="aO6-aA-1N1"/>
         <segue reference="oQl-bz-LlZ"/>
     </inferredMetricsTieBreakers>
 </document>
