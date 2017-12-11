@@ -80,9 +80,12 @@ class CarPageViewController: UIViewController {
     */
 
     @IBAction func saveButtonClicked(_ sender: Any) {
-        self.carMake1 = car1Make.text!
-        self.carModel1 = car1Model.text!
-        self.carYear1 = car1Year.text!
+        self.carMake1 = car1Make.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.carModel1 = car1Model.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.carYear1 = car1Year.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("Car #1 Make:", self.carMake1)
+        print("Car #1 Model:", self.carModel1)
+        print("Car #1 Year:", self.carYear1)
         
         self.carMake2 = car2Make.text!
         self.carModel2 = car2Model.text!

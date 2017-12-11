@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class NewUserViewController: UIViewController {
     let darkPurple = UIColor(red: 17.0/255.0, green: 29.0/255.0, blue: 68.0/255.0, alpha: 1.0)
@@ -16,16 +19,40 @@ class NewUserViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
 
+    @IBOutlet weak var createNewUser: UIButton!
     //DATA - save the name into the database under the user
     @IBOutlet weak var nameTextField: UITextField!
     //DATA - save the email into the database
     @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     //DATA - save the zipcode into the database under the user
     @IBOutlet weak var zipCodeTextField: UITextField!
     
+    
+    
     fileprivate var name: String!
     fileprivate var email: String!
+    fileprivate var pass: String!
     fileprivate var zip: String!
+    
+    var ref: DatabaseReference!
+    
+    @IBAction func createNewUser(_ sender: UIButton) {
+        guard let email = emailTextField.text, !email.isEmpty else {print("No email entered"); return}
+        guard let password = passwordTextField.text, !password.isEmpty else {print("No pass entered"); return}
+
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if error == nil {
+                //registration successful
+            }else{
+                print("didnt work")
+                print(error!)
+                //registration failure
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -35,12 +62,17 @@ class NewUserViewController: UIViewController {
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
         zipCodeTextField.delegate = self
+        //passwordTextField.delegate = self
+        
+        ref = Database.database().reference()
         
         // set placeholder
-      
+        
         self.emailTextField.attributedPlaceholder = getPlaceHolderText(text: "Email Address")
         
         self.nameTextField.attributedPlaceholder = getPlaceHolderText(text: "Name")
+        
+        self.passwordTextField.attributedPlaceholder = getPlaceHolderText(text: "Password")
         
         self.zipCodeTextField.attributedPlaceholder = getPlaceHolderText(text: "Zip Code")
         
@@ -77,22 +109,19 @@ extension NewUserViewController: UITextFieldDelegate{
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.email = emailTextField.text!
-        print(self.email)
         self.name = nameTextField.text!
-        print(self.name)
+        self.pass = passwordTextField.text!
         self.zip = zipCodeTextField.text!
-        print(self.zip)
         self.resignFirstResponder()
        // self.performSegue(withIdentifier: "login", sender: self.Any?)
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        self.email = emailTextField.text!
-        print(self.email)
-        self.name = nameTextField.text!
-        print(self.name)
-        self.zip = zipCodeTextField.text!
-        print(self.zip)
+        self.email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.name = nameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.pass = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.zip = zipCodeTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         self.resignFirstResponder()
     }
+    
 }
