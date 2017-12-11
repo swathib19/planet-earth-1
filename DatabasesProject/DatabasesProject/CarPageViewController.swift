@@ -150,10 +150,9 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             print(self.myID)
             fref.setValue([String(self.myID) : userID! as NSString])
             
-            
+            shouldPerformSegue(withIdentifier: "toMainView", sender: self)
         }
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
