@@ -1,41 +1,33 @@
-//
-//  CarPageViewController.swift
-//  DatabasesProject
-//
-//  Created by Swathi Balakrishnan on 12/9/17.
-//  Copyright © 2017 Tahia Emran. All rights reserved.
-//
-
 import UIKit
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
-class CarPageViewController: UIViewController {
-
+class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
     let darkPurple = UIColor(red: 17.0/255.0, green: 29.0/255.0, blue: 68.0/255.0, alpha: 1.0)
     let lightPurple = UIColor(red: 48.0/255.0, green: 59.0/255.0, blue: 116.0/255.0, alpha: 1.0)
     let lightPurple1 = UIColor(red: 75.0/255.0, green: 102.0/255.0, blue: 160.0/255.0, alpha: 1.0)
     let middle =  UIColor(red: 90.0/255.0, green: 132.0/255.0, blue: 182.0/255.0, alpha: 1.0)
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
-    @IBOutlet weak var car1Make: UITextField!
-    //DATA - Save car1 make, model, and year into the database
-    @IBOutlet weak var car1Model: UITextField!
-    @IBOutlet weak var car1Year: UITextField!
     
-    fileprivate var carMake1: String!
-    fileprivate var carModel1: String!
-    fileprivate var carYear1: String!
+    let userID = Auth.auth().currentUser?.uid
+    
+    
+    
+    @IBOutlet weak var makeField: UITextField!
+    @IBOutlet weak var modelField: UITextField!
+    @IBOutlet weak var yearField: UITextField!
+    
+    var makePicker = UIPickerView()
+    var modelPicker = UIPickerView()
+    var yearPicker = UIPickerView()
+    
+    let makes = ["Acura", "Alfa Romeo", "Aston Martin", "Audi", "BMW", "Bentley", "Bugatti", "Buick", "Cadillac", "Chevrolet", "Chrysler", "Dodge", "Ferrari", "Fiat", "Ford", "GMC", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu", "Jaguar", "Jeep", "Kia", "Lamborghini", "Land Rover", "Lexus", "Lincoln", "Lotus", "MINI", "Maserati", "Maybach", "Mazda", "Mercedes-Benz", "Mercury", "Mitsubishi", "Nissan", "Oldsmobile", "Peugeot", "Plymouth", "Pontiac", "Porsche", "Ram", "Rolls-Royce", "Roush Performance", "Saab", "Saturn", "Scion", "Spyker", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo", "smart"]
 
-    
-    @IBOutlet weak var car2Make: UITextField!
-    //DATA - SAVE car2 make, model, and year into the database (if it exists)
-    @IBOutlet weak var car2Model: UITextField!
-    @IBOutlet weak var car2Year: UITextField!
-    
-    fileprivate var carMake2: String!
-    fileprivate var carModel2: String!
-    fileprivate var carYear2: String!
-    
-    
+    var models : [String]? = []
+    var years : [String]? = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,20 +35,77 @@ class CarPageViewController: UIViewController {
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
-       
-        self.car1Year.delegate = self
-        self.car2Year.delegate = self
         
-        self.car1Make.attributedPlaceholder = getPlaceHolderText(text: "Car Make")
-        self.car1Model.attributedPlaceholder = getPlaceHolderText(text: "Car Model")
-        self.car1Year.attributedPlaceholder = getPlaceHolderText(text: "Car Year")
         
-        self.car2Make.attributedPlaceholder = getPlaceHolderText(text: "Car Make")
-        self.car2Model.attributedPlaceholder = getPlaceHolderText(text: "Car Model")
-        self.car2Year.attributedPlaceholder = getPlaceHolderText(text: "Car Year")
+        makePicker.delegate = self
+        makePicker.dataSource = self
+        
+        modelPicker.delegate = self
+        modelPicker.dataSource = self
+        
+        yearPicker.delegate = self
+        yearPicker.dataSource = self
+
+        makeField.inputView = makePicker
+        modelField.inputView = modelPicker
+        yearField.inputView = yearPicker
         
     }
-
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        if pickerView == makePicker{
+            return makes.count
+        }
+        else if pickerView == modelPicker{
+            return models!.count
+        }
+        else{
+            return years!.count
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerView == makePicker{
+            return makes[row]
+        }
+        else if pickerView == modelPicker{
+            if makeField.text != nil{
+                return models![row]
+            }
+        }
+        else{
+            if modelField.text != nil{
+                return years![row]
+            }
+            
+        }
+        return "Temp"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView == makePicker{
+            makeField.text = makes[row]
+            models? = ["buts"]
+        }
+        else if pickerView == modelPicker{
+            modelField.text = models![row]
+            years? = ["butts"]
+        }
+        else{
+            yearField.text = years![row]
+        }
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -68,34 +117,16 @@ class CarPageViewController: UIViewController {
         let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
         return placholderTxt
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @IBAction func saveButtonClicked(_ sender: Any) {
-        self.carMake1 = car1Make.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.carModel1 = car1Model.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.carYear1 = car1Year.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        print("Car #1 Make:", self.carMake1)
-        print("Car #1 Model:", self.carModel1)
-        print("Car #1 Year:", self.carYear1)
-        
-        self.carMake2 = car2Make.text!
-        self.carModel2 = car2Model.text!
-        self.carYear2 = car2Year.text!
-        
-    }
-    
-    
-    
-    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
 
@@ -105,30 +136,5 @@ extension CarPageViewController: UITextFieldDelegate{
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.carMake1 = car1Make.text!
-        self.carModel1 = car1Model.text!
-        self.carYear1 = car1Year.text!
-        
-        self.carMake2 = car2Make.text!
-        self.carModel2 = car2Model.text!
-        self.carYear2 = car2Year.text!
-        
-        self.resignFirstResponder()
-        
-    }
     
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.carMake1 = car1Make.text!
-        self.carModel1 = car1Model.text!
-        self.carYear1 = car1Year.text!
-        
-        self.carMake2 = car2Make.text!
-        self.carModel2 = car2Model.text!
-        self.carYear2 = car2Year.text!
-        self.resignFirstResponder()
-        return true
-    }
 }
-
