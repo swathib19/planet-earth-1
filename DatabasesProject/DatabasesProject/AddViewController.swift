@@ -94,6 +94,11 @@ class AddViewController: UIViewController {
         
         ref = Database.database().reference().child("UserTrips/".appending(userID!))
         
+        
+        ////EDIT QUERY HERE
+        //vars are stored in vID and userID (local to the function),
+        //tripMiles and tripDate (global)
+        
         ref.observeSingleEvent(of: .value, with: { snapshot in
                 let myTrips = snapshot.value!
                 print(myTrips)
