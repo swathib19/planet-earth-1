@@ -26,6 +26,8 @@ class OverviewPageViewController: UIViewController {
     @IBOutlet weak var daysLogged: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let newLayer = CAGradientLayer()

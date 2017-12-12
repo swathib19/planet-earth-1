@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import Firebase
+import FirebaseAuth
+import FirebaseCore
+import Foundation
 
 class HomePageViewController: UIViewController {
     let darkPurple = UIColor(red: 17.0/255.0, green: 29.0/255.0, blue: 68.0/255.0, alpha: 1.0)
@@ -16,29 +21,36 @@ class HomePageViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    let tonsOfC02perGallon = 0.008887
+    var ref: DatabaseReference!
     
-    // DATA: use this email to query the database to get the user
-    var userEmail: String!
+    let tonsOfC02perGallon = 0.008887/0.989
+    let mpgPlaceholder = 20.0
+    var worst: String = ""
+    var best: String = ""
+    var milesdouble =  0.0
     
-    // DATA: set attributed text for this label with user name from database - turn it white with turnTextWhite
     @IBOutlet weak var userName: UILabel!
     
-    // DATA: set attributed text for this label with min miles driven by user - turn it white with turnTextWhite
     @IBOutlet weak var bestDayMiles: UILabel!
+    @IBOutlet weak var worstDayMiles: UILabel!
     
     @IBOutlet weak var worstDay: UILabel!
     @IBOutlet weak var bestDay: UILabel!
-    //DATA: set attributed text for this label with max miles driven by user - turn it white with turnTextWhite
-    @IBOutlet weak var worstDayMiles: UILabel!
+    
+    @IBOutlet weak var bestDayEmissions: UILabel!
+    @IBOutlet weak var worstDayEmissions: UILabel!
+    
+    
+    @IBOutlet weak var worstMilesDriven: UILabel!
+    @IBOutlet weak var bestMilesDriven: UILabel!
+    
+    var holder: Double = 0.0
     
     // DATA uncomment the lines below to fill in the best/worst day emissions
     // var mpg: Int = query that gives mpg for car driven on best day
     // use this formula to calculate emissions of a car: (0.008887/0.989) * (miles driven)/(miles per gallon)
     // DATA: set the best day emissions label (attributed text) with above results - turn it white with turnTextWhite
-    @IBOutlet weak var bestDayEmissions: UILabel!
     // DATA: set the worst day emissions label (attribuetd text) with above results - turn it white with turnTextWhite (same equation as above)
-    @IBOutlet weak var worstDayEmissions: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +59,50 @@ class HomePageViewController: UIViewController {
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
         // Do any additional setup after loading the view.
+        
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        
+        ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
+            let newBest = snapshot.value as! NSDictionary
+            let keys = newBest.allKeys as! [String]
+            let newVal = newBest[keys[0]]
+            let bestMiles = String(describing: newVal)
+            let things = bestMiles.components(separatedBy: "miles = ")
+            var secondHalf: String = things[1]
+            let thongs = secondHalf.components(separatedBy: ";")
+            var miles: String = thongs[0]
+            self.worstMilesDriven.text = String(miles)
+            
+            let milesholder_1 = self.worstMilesDriven.text
+        
+            //self.worstDayEmissions.text = String((Double(milesholder_1!))! * self.mpgPlaceholder * self.tonsOfC02perGallon)
+            
+            
+        })
+       
+        ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { snapshot in
+            let newBest = snapshot.value as! NSDictionary
+            let keys = newBest.allKeys as! [String]
+            let newVal = newBest[keys[0]]
+            let bestMiles = String(describing: newVal)
+            let things = bestMiles.components(separatedBy: "miles = ")
+            var secondHalf: String = things[1]
+            let thongs = secondHalf.components(separatedBy: ";")
+            var miles: String = thongs[0]
+            self.bestMilesDriven.text = String(miles)
+            
+            let milesholder_2 = self.bestMilesDriven.text
+            
+            //self.bestDayEmissions.text = String((Double(milesholder_2!))! * self.mpgPlaceholder * self.tonsOfC02perGallon)
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     // FUNCTION TO TURN TEXT WHITE
     fileprivate func turnTextWhite(text:String) -> NSAttributedString{
@@ -69,16 +118,5 @@ class HomePageViewController: UIViewController {
         let placholderTxt = NSAttributedString(attributedString: attrPlaceholder)
         return placholderTxt
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
