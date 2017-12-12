@@ -71,8 +71,8 @@ class AddViewController: UIViewController {
         
         let userID = Auth.auth().currentUser?.uid
         ref.child("UserVehicles").child(userID!).observeSingleEvent(of: .value, with: { snapshot in
-                let vehicleID = snapshot.value as! Int
-                print(vehicleID)
+                let vehicleID = snapshot.value!
+                print("user", userID!, "has vID", vehicleID)
                 self.vID = String(describing: vehicleID)
                 print (self.vID)
                 let key = self.ref.child("UserTrips").childByAutoId().key

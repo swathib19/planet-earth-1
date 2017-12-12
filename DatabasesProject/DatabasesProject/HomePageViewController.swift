@@ -64,21 +64,28 @@ class HomePageViewController: UIViewController {
         let userID = Auth.auth().currentUser?.uid
         
         ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
-            let newBest = snapshot.value as! NSDictionary
-            let keys = newBest.allKeys as! [String]
-            let newVal = newBest[keys[0]]
-            let bestMiles = String(describing: newVal)
-            let things = bestMiles.components(separatedBy: "miles = ")
-            let secondHalf: String = things[1]
-            let thongs = secondHalf.components(separatedBy: ";")
-            let miles: String = thongs[0]
-            self.worstMilesDriven.text = miles
-        
-            self.worstDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
-                * self.mpgPlaceholder * self.tonsOfC02perGallon)
+            
+            if (!(snapshot.value is NSNull)) {
+                let newBest = snapshot.value as! NSDictionary
+                let keys = newBest.allKeys as! [String]
+                let newVal = newBest[keys[0]]
+                let bestMiles = String(describing: newVal)
+                let things = bestMiles.components(separatedBy: "miles = ")
+                let secondHalf: String = things[1]
+                let thongs = secondHalf.components(separatedBy: ";")
+                let miles: String = thongs[0]
+                self.worstMilesDriven.text = miles
+                
+                self.worstDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
+                    * self.mpgPlaceholder * self.tonsOfC02perGallon)
+            }
+            
         })
        
         ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { snapshot in
+            
+            if (!(snapshot.value is NSNull)) {
+            
             let newBest = snapshot.value as! NSDictionary
             let keys = newBest.allKeys as! [String]
             let newVal = newBest[keys[0]]
@@ -91,8 +98,8 @@ class HomePageViewController: UIViewController {
             
             self.bestDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
                 * self.mpgPlaceholder * self.tonsOfC02perGallon)
+            }
         })
-        
     }
 
     override func didReceiveMemoryWarning() {
