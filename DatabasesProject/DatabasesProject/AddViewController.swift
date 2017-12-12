@@ -83,20 +83,32 @@ class AddViewController: UIViewController {
         guard let thisDate = dateChosen.text, !thisDate.isEmpty else {print("No date entered"); return}
 
         let userID = Auth.auth().currentUser?.uid
-        ref.child("UserVehicles").child(userID!).observeSingleEvent(of: .value, with: { snapshot in
-                let vehicleID = snapshot.value!
-                print("user", userID!, "has vID", vehicleID)
-                print (vehicleID)
-                let key = self.ref.child("UserTrips").childByAutoId().key
+        var vID : Any = ""
+        
+        var ref = Database.database().reference().child("UserVehicles/".appending(userID!))
+        
+        ref.observeSingleEvent(of: .value, with: {snapshot in
+            let whatDoIhave = snapshot.value!
+            vID = whatDoIhave
+        })
+        
+        ref = Database.database().reference().child("UserTrips/".appending(userID!))
+        
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+                let myTrips = snapshot.value!
+                print(myTrips)
+                let key = ref.childByAutoId().key
+                print(key)
                 let trip = [
                     //"date": String(describing: self.dateChosen),
-                    "date": "353",
-                    "miles": miles,
-                    "vehicleId": vehicleID
+                    "date": self.tripDate,
+                    "miles": self.tripMiles,
+                    "vehicleId": vID
                 ]
-                let childUpdates = ["/UserTrips/\(userID!)/\(key)/": trip]
+                print(trip)
+                let update = ["\(userID!)/\(key)/": trip]
             
-                self.ref.updateChildValues(childUpdates)
+                ref.updateChildValues(update)
         })
     }}
 
