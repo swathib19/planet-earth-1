@@ -1226,8 +1226,6 @@
         <image name="up-arrow1" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rEr-6i-G7A"/>
-        <segue reference="GXR-4s-DuP"/>
         <segue reference="ZlO-Hi-lgI"/>
         <segue reference="Fop-gw-YjY"/>
         <segue reference="Aj5-CD-zWA"/>

@@ -143,12 +143,11 @@ class CarPageViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             self.present(alert, animated: true, completion: nil)
         }
         else {
-            let fref = Database.database().reference().child("UserVehicles")
+            let ref = Database.database().reference().child("UserVehicles")
             let userID = Auth.auth().currentUser?.uid
-            print("proper behavior")
-            print(userID!)
-            print(self.myID)
-            fref.setValue([String(self.myID) : userID! as NSString])
+            
+            let keyValue = [userID! : String(self.myID)]
+            ref.updateChildValues(keyValue)
             
             shouldPerformSegue(withIdentifier: "toMainView", sender: self)
         }

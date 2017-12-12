@@ -69,16 +69,13 @@ class HomePageViewController: UIViewController {
             let newVal = newBest[keys[0]]
             let bestMiles = String(describing: newVal)
             let things = bestMiles.components(separatedBy: "miles = ")
-            var secondHalf: String = things[1]
+            let secondHalf: String = things[1]
             let thongs = secondHalf.components(separatedBy: ";")
-            var miles: String = thongs[0]
-            self.worstMilesDriven.text = String(miles)
-            
-            let milesholder_1 = self.worstMilesDriven.text
+            let miles: String = thongs[0]
+            self.worstMilesDriven.text = miles
         
-            //self.worstDayEmissions.text = String((Double(milesholder_1!))! * self.mpgPlaceholder * self.tonsOfC02perGallon)
-            
-            
+            self.worstDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
+                * self.mpgPlaceholder * self.tonsOfC02perGallon)
         })
        
         ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { snapshot in
@@ -87,14 +84,13 @@ class HomePageViewController: UIViewController {
             let newVal = newBest[keys[0]]
             let bestMiles = String(describing: newVal)
             let things = bestMiles.components(separatedBy: "miles = ")
-            var secondHalf: String = things[1]
+            let secondHalf: String = things[1]
             let thongs = secondHalf.components(separatedBy: ";")
-            var miles: String = thongs[0]
-            self.bestMilesDriven.text = String(miles)
+            let miles: String = thongs[0]
+            self.bestMilesDriven.text = miles
             
-            let milesholder_2 = self.bestMilesDriven.text
-            
-            //self.bestDayEmissions.text = String((Double(milesholder_2!))! * self.mpgPlaceholder * self.tonsOfC02perGallon)
+            self.bestDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
+                * self.mpgPlaceholder * self.tonsOfC02perGallon)
         })
         
     }
