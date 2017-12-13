@@ -36,18 +36,39 @@ class NewUserViewController: UIViewController {
     @IBAction func createNewUser(_ sender: UIButton) {
         guard let email = emailTextField.text, !email.isEmpty else {print("No email entered"); return}
         guard let password = passwordTextField.text, !password.isEmpty else {print("No pass entered"); return}
+        guard let zip = zipCodeTextField.text, !zip.isEmpty else {print("No zip entered"); return}
 
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             if error == nil {
-                //registration successful
+                
             }else{
                 print("didnt work")
                 print(error!)
                 //registration failure
             }
         }
+    
+        var i = 1
+        while (true){
+            i += 1
+            if i == 1500000000{
+                break
+            }
+        }
+        
+        let zipRef = Database.database().reference().child("UserZips")
+        let userID = Auth.auth().currentUser?.uid
+        print("uid", userID, "zip", zip)
+        
+        let keyValue = [userID! : String(zip)]
+        zipRef.updateChildValues(keyValue)
+        
     }
     
+    func doStuff(text:String) -> Bool{
+        
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,16 +105,6 @@ class NewUserViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
 extension NewUserViewController: UITextFieldDelegate{

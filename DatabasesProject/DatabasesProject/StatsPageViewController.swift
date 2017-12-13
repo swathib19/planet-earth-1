@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import Firebase
+import FirebaseAuth
+import FirebaseCore
 
 class StatsPageViewController: UIViewController {
     let darkPurple = UIColor(red: 17.0/255.0, green: 29.0/255.0, blue: 68.0/255.0, alpha: 1.0)
@@ -30,7 +34,8 @@ class StatsPageViewController: UIViewController {
     //DATA - average gas mileage of all the cars
     @IBOutlet weak var carMileage: UILabel!
     
-    //MAKE THE TILE ON THE LEFT TURN RED OR GREEN BASED ON IF THEY ARE ABOVE OR BELOW THE AVERAGE
+    var currentUserZipCode = ""
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +43,65 @@ class StatsPageViewController: UIViewController {
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
-        // Do any additional setup after loading the view.
+        
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        let vehEmissionsRef = ref.child("VehicleEmissions")
+        let userRef = ref.child("UserTrips")
+        let vehRef = ref.child("UserVehicles")
+        let zipRef = ref.child("UserZips")
+        let locRef = ref.child("Locations").child("Emissions")
+        
+        userRef.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
+            
+            let count = Int(snapshot.childrenCount)
+            var sum = 0
+            var avgMiles = 0
+            
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
+            for child in snapshots {
+                let tripsSnap = child.childSnapshot(forPath: ("miles"))
+                let data = tripsSnap.value
+                let final = data as! String
+                sum = sum + Int(final)!
+            }
+            }
+        
+            if (count != 0){avgMiles = sum/count}
+            self.yourAvgMiles.text = String(avgMiles)
+            
+            vehRef.child(userID!).observeSingleEvent(of: .value, with: { snapshot4 in
+                let vehicleID = snapshot4.value! as? String
+                
+                vehEmissionsRef.child(vehicleID!).observeSingleEvent(of: .value, with: { snapshot5 in
+                    let emissionsDict = snapshot5.value as! NSDictionary
+                    let mpg = emissionsDict["mpg"] as? Int
+                    let avgEmission = (Double(avgMiles)/Double(mpg!)) * (0.008887/0.989)
+                    self.yourAvgEmissions.text = String((round(100*avgEmission)/100))
+                    self.carMileage.text = String(describing: mpg!)
+                })
+            })
+        })
+        
+        zipRef.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
+            print("snapshot", snapshot)
+            self.currentUserZipCode = (snapshot.value as? String)!
+            print ("in my zip code", self.currentUserZipCode)
+            
+            locRef.child(self.currentUserZipCode).observeSingleEvent(of: .value, with: {snapshot2 in
+                
+                if (!(snapshot2.value is NSNull)) {
+                    let zipDictionary = snapshot2.value as! NSDictionary
+                    let miles = zipDictionary["VehicleMiles"] as? Int
+                    let zipMiles = String (miles!/1095)
+                    self.zipAvgMiles.text = zipMiles
+                    let transport = zipDictionary["Transport"] as? Double
+                    let thing = transport! / 1095
+                    self.zipAvgEmisssions.text = String((round(100*thing)/100))
+                }
+            })
+        })
+        carRating.text = "NA"
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,15 +109,4 @@ class StatsPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
