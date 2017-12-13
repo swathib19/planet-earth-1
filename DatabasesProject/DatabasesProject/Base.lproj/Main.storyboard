@@ -1050,7 +1050,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.62080603840000004" green="0.93560999629999997" blue="0.77253049610000002" alpha="0.54621478869999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.44654774670000003" green="0.62022471430000004" blue="0.78433567289999995" alpha="0.53015303940000003" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih3-nk-tSx">
                                 <rect key="frame" x="30" y="286" width="146" height="140"/>
@@ -1075,7 +1075,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93927747009999996" green="0.57313376670000005" blue="0.55292981860000001" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.44654774670000003" green="0.62022471430000004" blue="0.78433567289999995" alpha="0.53015303940000003" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAK-fp-OOL">
                                 <rect key="frame" x="204" y="100" width="146" height="140"/>
@@ -1125,7 +1125,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.62080603840000004" green="0.93560999629999997" blue="0.77253049610000002" alpha="0.54621478869999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.44654774670000003" green="0.62022471430000004" blue="0.78433567289999995" alpha="0.53015303940000003" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n44-6F-wTc">
                                 <rect key="frame" x="204" y="465" width="146" height="140"/>
