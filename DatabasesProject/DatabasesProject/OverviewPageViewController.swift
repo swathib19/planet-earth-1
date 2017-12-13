@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import Firebase
+import FirebaseAuth
+import FirebaseCore
 
 class OverviewPageViewController: UIViewController {
     let darkPurple = UIColor(red: 17.0/255.0, green: 29.0/255.0, blue: 68.0/255.0, alpha: 1.0)
@@ -26,7 +30,7 @@ class OverviewPageViewController: UIViewController {
     @IBOutlet weak var daysLogged: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,42 @@ class OverviewPageViewController: UIViewController {
         view.layer.insertSublayer(newLayer, at: 0)
         self.datePicker.setValue(UIColor.white, forKey: "textColor")
         // Do any additional setup after loading the view.
+        
+        ref = Database.database().reference()
+        let userID = Auth.auth().currentUser?.uid
+        let userRef = ref.child("UserTrips")
+        let vehRef = ref.child("UserVehicles")
+        let vehEmissionsRef = ref.child("VehicleEmissions")
+        
+        vehRef.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
+            let vehicleID = snapshot.value! as? String
+            
+            var totalMiles = 0
+            
+            userRef.child(userID!).observeSingleEvent(of: .value, with: { snapshot2 in
+                
+                let count = Int(snapshot2.childrenCount)
+                self.daysLogged.text = String(describing: count)
+                
+                if let snapshots = snapshot2.children.allObjects as? [DataSnapshot] {
+                    for child in snapshots {
+                        let tripsSnap = child.childSnapshot(forPath: ("miles"))
+                        let data = tripsSnap.value
+                        let final = data as! String
+                        totalMiles = totalMiles + Int(final)!
+                    }
+                    self.milesDriven.text = String(describing: totalMiles)
+                }
+                
+                vehEmissionsRef.child(vehicleID!).observeSingleEvent(of: .value, with: { snapshot3 in
+                    let emissionsDict = snapshot3.value as! NSDictionary
+                    let mpg = emissionsDict["mpg"] as? Int
+                    let totalEmissions = (Double(totalMiles)/Double(mpg!)) * (0.008887/0.989)
+                    self.energyImpact.text = String((round(100*totalEmissions)/100))
+                })
+                
+            })
+        })
     }
 
     override func didReceiveMemoryWarning() {
