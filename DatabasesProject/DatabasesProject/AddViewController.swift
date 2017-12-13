@@ -21,8 +21,6 @@ class AddViewController: UIViewController {
     let blue1 =  UIColor(red: 103.0/255.0, green: 159.0/255.0, blue: 202.0/255.0, alpha: 1.0)
     let darkBlue = UIColor(red: 125.0/255.0, green: 203.0/255.0, blue: 232.0/255.0, alpha: 1.0)
     
-    
-    
     @IBOutlet weak var dateChosen: UITextField!
     @IBOutlet weak var savePressed: UIButton!
     @IBOutlet weak var milesDriven: UITextField!
@@ -42,10 +40,6 @@ class AddViewController: UIViewController {
         view.layer.insertSublayer(newLayer, at: 0)
 
         createDatePicker()
-        
-        
-        //self.datePicker.setValue(UIColor.white, forKey: "textColor")
-        // Do any additional setup after loading the view.
     }
     
     func createDatePicker(){
@@ -83,38 +77,25 @@ class AddViewController: UIViewController {
         guard let thisDate = dateChosen.text, !thisDate.isEmpty else {print("No date entered"); return}
 
         let userID = Auth.auth().currentUser?.uid
-        var vID : Any = ""
+       
+        ref = Database.database().reference()
+        let vehiclesRef = ref.child("UserVehicles")
+        let userRef = ref.child("UserTrips")
         
-        var ref = Database.database().reference().child("UserVehicles/".appending(userID!))
-        
-        ref.observeSingleEvent(of: .value, with: {snapshot in
-            let whatDoIhave = snapshot.value!
-            vID = whatDoIhave
+        vehiclesRef.child(userID!).observeSingleEvent(of: .value, with: {snapshot in
+            let vID = snapshot.value! as? String
+            let key = userRef.child(userID!).childByAutoId().key
+            let trip = [
+                "date": self.tripDate,
+                "miles": self.tripMiles,
+                "vehicleId": vID
+            ]
+            let update = ["\(userID!)/\(key)/": trip]
+            userRef.updateChildValues(update)
+
         })
-        
-        ref = Database.database().reference().child("UserTrips")        
-        
-        ////EDIT QUERY HERE
-        //vars are stored in vID and userID (local to the function),
-        //tripMiles and tripDate (global)
-        
-        ref.child(userID!).observeSingleEvent(of: .value, with: { snapshot in
-                let myTrips = snapshot.value!
-                print(myTrips)
-                let key = ref.childByAutoId().key
-                print(key)
-                let trip = [
-                    //"date": String(describing: self.dateChosen),
-                    "date": self.tripDate,
-                    "miles": self.tripMiles,
-                    "vehicleId": vID
-                ]
-                print(trip)
-                let update = ["\(userID!)/\(key)/": trip]
-            
-                ref.updateChildValues(update)
-        })
-    }}
+    }
+}
 
 
 extension AddViewController: UIPickerViewDataSource{
@@ -127,13 +108,6 @@ extension AddViewController: UIPickerViewDataSource{
 }
 
 extension AddViewController: UITextFieldDelegate{
-//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-//
-//        let attrName: NSMutableAttributedString = NSMutableAttributedString(string: carName)
-//        attrName.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSMakeRange(0, carName.count))
-//        return NSAttributedString(attributedString: attrName)
-//    }
-    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.becomeFirstResponder()
@@ -148,6 +122,5 @@ extension AddViewController: UITextFieldDelegate{
         self.tripMiles = milesDriven.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         self.resignFirstResponder()
     }
-
 }
 

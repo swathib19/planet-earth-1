@@ -58,48 +58,46 @@ class HomePageViewController: UIViewController {
         newLayer.colors = [darkPurple.cgColor, lightPurple.cgColor, lightPurple1.cgColor, middle.cgColor  ,blue1.cgColor ,darkBlue.cgColor]
         newLayer.frame = self.view.frame
         view.layer.insertSublayer(newLayer, at: 0)
-        // Do any additional setup after loading the view.
-        
+
         ref = Database.database().reference()
         let userID = Auth.auth().currentUser?.uid
         
-        ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toFirst: 1).observeSingleEvent(of: .value, with: { snapshot in
+        ref.child("UserTrips").child(userID!).observe(.value, with: { snapshot in
             
-            if (!(snapshot.value is NSNull)) {
-                let newBest = snapshot.value as! NSDictionary
-                let keys = newBest.allKeys as! [String]
-                let newVal = newBest[keys[0]]
-                let bestMiles = String(describing: newVal)
-                let things = bestMiles.components(separatedBy: "miles = ")
-                let secondHalf: String = things[1]
-                let thongs = secondHalf.components(separatedBy: ";")
-                let miles: String = thongs[0]
-                self.worstMilesDriven.text = miles
+            print("snapshot", snapshot)
+            
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 
-                self.worstDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
-                    * self.mpgPlaceholder * self.tonsOfC02perGallon)
+                var min = 10000
+                var max = -1
+                
+                for child in snapshots {
+                    let tripsSnap = child.childSnapshot(forPath: ("miles"))
+                    let data = tripsSnap.value
+                    print("data:", data)
+    
+                    let boop = data as! String
+                    let final = Int(boop)!
+                    
+                    if (final < min) {
+                        min = final
+                    }
+                    if (final > max) {
+                        max = final
+                    }
+                }
+                
+                if (min == 10000){min = 0}
+                if (max == -1){max = 0}
+                self.bestMilesDriven.text = String(describing: min)
+                self.worstMilesDriven.text = String(describing: max)
+                let bestEmissions = (Double(min) / self.mpgPlaceholder) * self.tonsOfC02perGallon
+                self.bestDayEmissions.text = String((round(100*bestEmissions)/100))
+                let worstEmissions = (Double(max) / self.mpgPlaceholder) * self.tonsOfC02perGallon
+                self.worstDayEmissions.text = String((round(100*worstEmissions)/100))
             }
-            
         })
-       
-        ref.child("UserTrips").child(userID!).queryOrdered(byChild: "miles").queryLimited(toLast: 1).observeSingleEvent(of: .value, with: { snapshot in
-            
-            if (!(snapshot.value is NSNull)) {
-            
-            let newBest = snapshot.value as! NSDictionary
-            let keys = newBest.allKeys as! [String]
-            let newVal = newBest[keys[0]]
-            let bestMiles = String(describing: newVal)
-            let things = bestMiles.components(separatedBy: "miles = ")
-            let secondHalf: String = things[1]
-            let thongs = secondHalf.components(separatedBy: ";")
-            let miles: String = thongs[0]
-            self.bestMilesDriven.text = miles
-            
-            self.bestDayEmissions.text = String((Double(miles.trimmingCharacters(in: .whitespacesAndNewlines)))!
-                * self.mpgPlaceholder * self.tonsOfC02perGallon)
-            }
-        })
+    
     }
 
     override func didReceiveMemoryWarning() {
